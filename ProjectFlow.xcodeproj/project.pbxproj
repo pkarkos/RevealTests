@@ -16,8 +16,9 @@
 		57CB7C88175E8DFB0060722B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 57CB7C87175E8DFB0060722B /* Default.png */; };
 		57CB7C8A175E8DFB0060722B /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57CB7C89175E8DFB0060722B /* Default@2x.png */; };
 		57CB7C8C175E8DFB0060722B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57CB7C8B175E8DFB0060722B /* Default-568h@2x.png */; };
-		57CB7C8F175E8DFB0060722B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57CB7C8E175E8DFB0060722B /* ViewController.m */; };
-		57CB7C92175E8DFB0060722B /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57CB7C90175E8DFB0060722B /* ViewController.xib */; };
+		57CB7C9A175E8E280060722B /* RevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57CB7C99175E8E280060722B /* RevealViewController.m */; };
+		57CB7C9D175E8E360060722B /* StickyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57CB7C9C175E8E360060722B /* StickyViewController.m */; };
+		57CB7CA0175EA5BF0060722B /* StickyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57CB7C9F175EA5BF0060722B /* StickyView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,9 +35,12 @@
 		57CB7C87175E8DFB0060722B /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		57CB7C89175E8DFB0060722B /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		57CB7C8B175E8DFB0060722B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		57CB7C8D175E8DFB0060722B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		57CB7C8E175E8DFB0060722B /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		57CB7C91175E8DFB0060722B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		57CB7C98175E8E280060722B /* RevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RevealViewController.h; sourceTree = "<group>"; };
+		57CB7C99175E8E280060722B /* RevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RevealViewController.m; sourceTree = "<group>"; };
+		57CB7C9B175E8E360060722B /* StickyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StickyViewController.h; sourceTree = "<group>"; };
+		57CB7C9C175E8E360060722B /* StickyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StickyViewController.m; sourceTree = "<group>"; };
+		57CB7C9E175EA5BF0060722B /* StickyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StickyView.h; sourceTree = "<group>"; };
+		57CB7C9F175EA5BF0060722B /* StickyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StickyView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,10 +89,13 @@
 			children = (
 				57CB7C84175E8DFB0060722B /* AppDelegate.h */,
 				57CB7C85175E8DFB0060722B /* AppDelegate.m */,
-				57CB7C8D175E8DFB0060722B /* ViewController.h */,
-				57CB7C8E175E8DFB0060722B /* ViewController.m */,
-				57CB7C90175E8DFB0060722B /* ViewController.xib */,
 				57CB7C7C175E8DFB0060722B /* Supporting Files */,
+				57CB7C98175E8E280060722B /* RevealViewController.h */,
+				57CB7C99175E8E280060722B /* RevealViewController.m */,
+				57CB7C9B175E8E360060722B /* StickyViewController.h */,
+				57CB7C9C175E8E360060722B /* StickyViewController.m */,
+				57CB7C9E175EA5BF0060722B /* StickyView.h */,
+				57CB7C9F175EA5BF0060722B /* StickyView.m */,
 			);
 			path = ProjectFlow;
 			sourceTree = "<group>";
@@ -162,7 +169,6 @@
 				57CB7C88175E8DFB0060722B /* Default.png in Resources */,
 				57CB7C8A175E8DFB0060722B /* Default@2x.png in Resources */,
 				57CB7C8C175E8DFB0060722B /* Default-568h@2x.png in Resources */,
-				57CB7C92175E8DFB0060722B /* ViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,7 +181,9 @@
 			files = (
 				57CB7C82175E8DFB0060722B /* main.m in Sources */,
 				57CB7C86175E8DFB0060722B /* AppDelegate.m in Sources */,
-				57CB7C8F175E8DFB0060722B /* ViewController.m in Sources */,
+				57CB7C9A175E8E280060722B /* RevealViewController.m in Sources */,
+				57CB7C9D175E8E360060722B /* StickyViewController.m in Sources */,
+				57CB7CA0175EA5BF0060722B /* StickyView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,14 +196,6 @@
 				57CB7C7F175E8DFB0060722B /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		57CB7C90175E8DFB0060722B /* ViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				57CB7C91175E8DFB0060722B /* en */,
-			);
-			name = ViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -263,6 +263,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ProjectFlow/ProjectFlow-Prefix.pch";
 				INFOPLIST_FILE = "ProjectFlow/ProjectFlow-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -274,6 +275,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ProjectFlow/ProjectFlow-Prefix.pch";
 				INFOPLIST_FILE = "ProjectFlow/ProjectFlow-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
