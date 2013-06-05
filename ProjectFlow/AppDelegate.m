@@ -24,8 +24,8 @@
     [[viewController stickyView] setBackgroundColor:[UIColor yellowColor]];
     [[[viewController stickyView] header] setBackgroundColor:[UIColor blueColor]];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
-    [self setRevealViewController:[[RevealViewController alloc] initWithFrontViewController:navigationController andRearViewController:viewController]];
-    self.window.rootViewController = viewController; // self.revealViewController;
+    [self setRevealViewController:[[RevealViewController alloc] initWithFrontViewController:viewController andRearViewController:rearViewController]];
+    self.window.rootViewController = self.revealViewController;
     [self.window makeKeyAndVisible];
     return YES;
 }
