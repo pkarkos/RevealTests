@@ -8,6 +8,7 @@
 
 #import "RevealViewController.h"
 
+
 @interface RevealViewController ()
 
 @property (strong, nonatomic) UIView *frontView;
@@ -19,6 +20,7 @@
 
 @synthesize frontViewController = _frontViewController;
 @synthesize rearViewController = _rearViewController;
+@synthesize hiddenTableViewController = _hiddenTableViewController;
 
 - (id)initWithFrontViewController:(UIViewController *)frontViewController
             andRearViewController:(UIViewController *)rearViewController
@@ -27,6 +29,10 @@
     if (self) {
         _frontViewController = frontViewController;
         _rearViewController = rearViewController;
+        [self addRearViewControllerToHeirarchy:_rearViewController];
+        //[self addFrontViewControllerToHeirarchy:_frontViewController];
+        //self.hiddenTableViewController = [[HiddenTableViewController alloc] init];
+        [self viewDidLoad];
     }
     return self;
 }
@@ -34,13 +40,14 @@
 - (void)addFrontViewControllerToHeirarchy:(UIViewController *)frontViewController
 {
     [self addChildViewController:frontViewController];
-    [[self frontView] addSubview:[frontViewController view]];
+    //[[self frontView] addSubview:[frontViewController view]];
 }
 
 - (void)addRearViewControllerToHeirarchy:(UIViewController *)rearViewController
 {
     [self addChildViewController:rearViewController];
-    [[self rearView] addSubview:[rearViewController view]];
+    //[[self rearView] addSubview:[rearViewController view]];
+    
 }
 
 - (void)viewDidLoad
@@ -48,13 +55,9 @@
     [super viewDidLoad];
     
     [self setFrontView:[[UIView alloc] initWithFrame:[[self view] bounds]]];
-    [self setRearView:[[UIView alloc] initWithFrame:[[self view] bounds]]];
-    
+    [self setRearView:self.rearViewController.view];
     [[self view] addSubview:[self rearView]];
     [[self view] addSubview:[self frontView]];
-    
-    [self addFrontViewControllerToHeirarchy:[self frontViewController]];
-    [self addRearViewControllerToHeirarchy:[self rearViewController]];
 }
 
 @end

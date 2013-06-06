@@ -19,6 +19,7 @@
 		57CB7C9A175E8E280060722B /* RevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57CB7C99175E8E280060722B /* RevealViewController.m */; };
 		57CB7C9D175E8E360060722B /* StickyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57CB7C9C175E8E360060722B /* StickyViewController.m */; };
 		57CB7CA0175EA5BF0060722B /* StickyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57CB7C9F175EA5BF0060722B /* StickyView.m */; };
+		D0C139DD175FBAE200001E3E /* HiddenTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0C139DC175FBAE200001E3E /* HiddenTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,8 @@
 		57CB7C9C175E8E360060722B /* StickyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StickyViewController.m; sourceTree = "<group>"; };
 		57CB7C9E175EA5BF0060722B /* StickyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StickyView.h; sourceTree = "<group>"; };
 		57CB7C9F175EA5BF0060722B /* StickyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StickyView.m; sourceTree = "<group>"; };
+		D0C139DB175FBAE200001E3E /* HiddenTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HiddenTableViewController.h; sourceTree = "<group>"; };
+		D0C139DC175FBAE200001E3E /* HiddenTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HiddenTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +99,8 @@
 				57CB7C9C175E8E360060722B /* StickyViewController.m */,
 				57CB7C9E175EA5BF0060722B /* StickyView.h */,
 				57CB7C9F175EA5BF0060722B /* StickyView.m */,
+				D0C139DB175FBAE200001E3E /* HiddenTableViewController.h */,
+				D0C139DC175FBAE200001E3E /* HiddenTableViewController.m */,
 			);
 			path = ProjectFlow;
 			sourceTree = "<group>";
@@ -184,6 +189,7 @@
 				57CB7C9A175E8E280060722B /* RevealViewController.m in Sources */,
 				57CB7C9D175E8E360060722B /* StickyViewController.m in Sources */,
 				57CB7CA0175EA5BF0060722B /* StickyView.m in Sources */,
+				D0C139DD175FBAE200001E3E /* HiddenTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +306,7 @@
 				57CB7C97175E8DFB0060722B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

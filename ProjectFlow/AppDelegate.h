@@ -8,12 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@class StickyViewController;
 @class RevealViewController;
+@class HiddenTableViewController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
+@property (strong, nonatomic) StickyViewController *stickyViewController;
 @property (strong, nonatomic) RevealViewController *revealViewController;
+@property (strong, nonatomic) UINavigationController *navController;
+@property (strong, nonatomic) HiddenTableViewController *hiddenVC;
 
 @end

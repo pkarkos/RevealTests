@@ -15,6 +15,7 @@
 @implementation StickyViewController
 
 @synthesize stickyView = _stickyView;
+@synthesize hiddenVC = _hiddenVC;
 
 - (id)init
 {
@@ -31,7 +32,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -42,6 +43,9 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
+    [scrollView setDirectionalLockEnabled:YES];
+    [scrollView setBounces:NO];
+    [self.view sendSubviewToBack:self.view];
     if (scrollView == [[self stickyView] body]) {
         NSLog(@"%f",[scrollView contentOffset].y);
         if ([scrollView contentOffset].y > -45) {
@@ -55,7 +59,14 @@
                                                             [[[self stickyView] header] frame].size.width,
                                                             [[[self stickyView] header] frame].size.height)];
         }
+        else if (scrollView.contentOffset.x != 0){
+            self.hiddenVC = [[HiddenTableViewController alloc] init];
+            [self.navigationController pushViewController:self.parentViewController animated:YES];
+        }
     }
+    
+    
+
 }
 
 @end

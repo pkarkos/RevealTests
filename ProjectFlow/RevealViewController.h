@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HiddenTableViewController.h"
 
 @interface RevealViewController : UIViewController
 
 @property (strong, nonatomic) UIViewController *frontViewController;
 @property (strong, nonatomic) UIViewController *rearViewController;
+@property (strong, nonatomic) HiddenTableViewController *hiddenTableViewController;
 
 - (id)initWithFrontViewController:(UIViewController *)frontViewController
             andRearViewController:(UIViewController *)rearViewController;

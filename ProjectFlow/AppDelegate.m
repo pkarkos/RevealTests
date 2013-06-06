@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
+#import "HiddenTableViewController.h"
 #import "RevealViewController.h"
 #import "StickyViewController.h"
 
@@ -17,15 +17,17 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    
     // Override point for customization after application launch.
-    UIViewController *rearViewController = [[UIViewController alloc] init];
-    [[rearViewController view] setBackgroundColor:[UIColor greenColor]];
-    StickyViewController *viewController = [[StickyViewController alloc] init];
-    [[viewController stickyView] setBackgroundColor:[UIColor yellowColor]];
-    [[[viewController stickyView] header] setBackgroundColor:[UIColor blueColor]];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
-    [self setRevealViewController:[[RevealViewController alloc] initWithFrontViewController:navigationController andRearViewController:viewController]];
-    self.window.rootViewController = viewController; // self.revealViewController;
+    self.hiddenVC = [[HiddenTableViewController alloc] init];
+    self.stickyViewController = [[StickyViewController alloc] init];
+    [[self.stickyViewController stickyView] setBackgroundColor:[UIColor yellowColor]];
+    [[[self.stickyViewController stickyView] header] setBackgroundColor:[UIColor blueColor]];
+    self.navController = [[UINavigationController alloc] initWithRootViewController:self.stickyViewController];
+    [self setRevealViewController:[[RevealViewController alloc] initWithFrontViewController:self.navController andRearViewController:self.hiddenVC]];
+
+    self.window.rootViewController = self.navController; // self.revealViewController;
+    self.window.rootViewController = self.navController;
     [self.window makeKeyAndVisible];
     return YES;
 }

@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
 #import "StickyView.h"
+#import "HiddenTableViewController.h"
 
 @interface StickyViewController : UIViewController <UIScrollViewDelegate>
 
 @property (strong, nonatomic) StickyView *stickyView;
+@property (strong, nonatomic) HiddenTableViewController *hiddenVC;
 
 @end
