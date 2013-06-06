@@ -9,7 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "HiddenTableViewController.h"
 
-@interface RevealViewController : UIViewController
+typedef enum {
+    FrontViewPositionLeft,
+    FrontViewPositionRight,
+} FrontViewController;
+
+@interface RevealViewController : UIViewController <UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) UIViewController *frontViewController;
 @property (strong, nonatomic) UIViewController *rearViewController;
@@ -20,5 +25,7 @@
 
 - (void)addFrontViewControllerToHeirarchy:(UIViewController *)frontViewController;
 - (void)addRearViewControllerToHeirarchy:(UIViewController *)rearViewController;
+
+- (void)revealGesture:(UIPanGestureRecognizer *)recognizer;
 
 @end
