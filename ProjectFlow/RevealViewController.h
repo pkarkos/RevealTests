@@ -19,6 +19,8 @@ typedef enum {
 @property (strong, nonatomic) UIViewController *frontViewController;
 @property (strong, nonatomic) UIViewController *rearViewController;
 @property (strong, nonatomic) HiddenTableViewController *hiddenTableViewController;
+@property (assign, nonatomic) FrontViewController *currentFrontViewPosition;
+@property (nonatomic) BOOL hiddenViewIsBeingShown;
 
 - (id)initWithFrontViewController:(UIViewController *)frontViewController
             andRearViewController:(UIViewController *)rearViewController;

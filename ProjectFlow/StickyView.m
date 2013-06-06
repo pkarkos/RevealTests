@@ -39,6 +39,7 @@
         [label setText:@"test"];
         [label setTextColor:[UIColor blueColor]];
         
+        
         [self addSubview:[self body]];
         [[self body] addSubview:label];
         [[self body] addSubview:[self header]];

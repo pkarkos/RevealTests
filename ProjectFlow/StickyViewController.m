@@ -22,9 +22,11 @@
     self = [super init];
     if (self) {
         UIScrollView *notUsed = [[UIScrollView alloc] init];
+        [notUsed setBounces:NO];
         _stickyView = [[StickyView alloc] initWithBody:notUsed];
         [self setView:[self stickyView]];
         [[[self stickyView] body] setDelegate:self];
+        
     }
     return self;
 }
