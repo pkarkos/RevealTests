@@ -7,6 +7,7 @@
 //
 
 #import "RevealViewController.h"
+#import "StickyViewController.h"
 
 
 @interface RevealViewController ()
@@ -21,7 +22,7 @@
 @synthesize frontViewController = _frontViewController;
 @synthesize rearViewController = _rearViewController;
 @synthesize hiddenTableViewController = _hiddenTableViewController;
-@synthesize hiddenViewIsBeingShown =_hiddenViewIsBeingShown;
+@synthesize panGesture = _panGesture;
 
 - (id)initWithFrontViewController:(UIViewController *)frontViewController
             andRearViewController:(UIViewController *)rearViewController
@@ -32,7 +33,7 @@
         _rearViewController = rearViewController;
         [self addRearViewControllerToHeirarchy:_rearViewController];
         [self addFrontViewControllerToHeirarchy:_frontViewController];
-        self.hiddenViewIsBeingShown = NO;
+        self.panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(revealGesture:)];
         //self.hiddenTableViewController = [[HiddenTableViewController alloc] init];
         [self viewDidLoad];
     }
@@ -66,92 +67,35 @@
     
     [self setCurrentFrontViewPosition:FrontViewPositionLeft];
     
-    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(revealGesture:)];
-    [[self frontView] addGestureRecognizer:panGesture];
+    [[self frontView] addGestureRecognizer:self.panGesture];
+    [self.panGesture setDelegate:self];
     
     [self addFrontViewControllerToHeirarchy:[self frontViewController]];
     [self addRearViewControllerToHeirarchy:[self rearViewController]];
 }
 
-//- (void)revealGesture:(UIPanGestureRecognizer *)recognizer
-//{
-//    
-//    NSLog(@"Offset: %f", [self frontView].frame.origin.x);
-//    //NSLog(@"Translation In View: %f", [recognizer translationInView:[self view]].x);
-//    switch ([recognizer state]) {
-//        case UIGestureRecognizerStateBegan:
-//        case UIGestureRecognizerStateChanged:
-//           // NSLog(@"THIS IS THE TRANSLATION: %f", [recognizer translationInView:[self view]].x);
-//            
-//                 
-//            
-//            if ([recognizer translationInView:[self view]].x < 0) {
-//                [[self frontView] setFrame:CGRectMake(0, 0, [[self view] frame].size.width, [[self view]frame].size.height)];
-//                
-//            }
-//            else if (self.hiddenViewIsBeingShown){
-//                NSLog(@"THIS IS THE X OFFSET: %f", [[self frontView] frame].origin.x);
-//                NSLog(@"THIS IS THE TRANSLATION: %f", ([recognizer translationInView:[self view]].x + 275));
-//                [[self frontView] setFrame:CGRectMake(([recognizer translationInView:[self view]].x + [[self frontView] frame].origin.x),
-//                                                      0,
-//                                                      [[self view] frame].size.width,
-//                                                      [[self view] frame].size.height)];
-//                //self.hiddenViewIsBeingShown = NO;
-//                
-//            }
-//            else if ([[self frontView] frame].origin.x > 0){
-//   
-//            [[self frontView] setFrame:CGRectMake([recognizer translationInView:[self view]].x,
-//                                                  0,
-//                                                  [[self view] frame].size.width,
-//                                                  [[self view] frame].size.height)];
-//                self.hiddenViewIsBeingShown = NO;
-//            }
-//
-//            if ([recognizer velocityInView:[self view]].x > 700) {
-//                [UIView animateWithDuration:.10f delay:0.0f options:UIViewAnimationOptionCurveLinear animations:^{
-//                    [[self frontView] setFrame:CGRectMake(275, 0, [[self view] frame].size.width,[[self view] frame].size.height )];
-//                }completion:^(BOOL finished){
-//                    
-//                }];
-//                self.hiddenViewIsBeingShown = YES;
-//            }
-//            break;
-//            
-//        case UIGestureRecognizerStateEnded:
-//            if ([[self frontView] frame].origin.x <= 200) {
-//                [UIView animateWithDuration:.10f delay:0.0f options:UIViewAnimationOptionCurveLinear animations:^{
-//                    [[self frontView] setFrame:CGRectMake(0, 0, [[self view] frame].size.width,[[self view] frame].size.height )];
-//                }completion:^(BOOL finished){
-//                      NSLog(@"FINISHED STATE ENDED");
-//                }];
-//                self.hiddenViewIsBeingShown = YES;
-//                
-//            } else if ([[self frontView] frame].origin.x > 200) {
-//                [UIView animateWithDuration:.050f delay:0.0f options:UIViewAnimationOptionCurveLinear animations:^{
-//                    [[self frontView] setFrame:CGRectMake(275, 0, [[self view] frame].size.width,[[self view] frame].size.height )];
-//                }completion:^(BOOL finished){
-//                    NSLog(@"FINISHED STATE ENDED");
-//                }];
-//                self.hiddenViewIsBeingShown = YES;
-//            }
-//            break;
-//    }
-//    
-//    //NSLog(@"%f",[recognizer translationInView:[self view]].x);
-//    
-//}
 - (void)revealGesture:(UIPanGestureRecognizer *)recognizer
 {
-    
+    StickyView *visibleController = (StickyView *)[self.frontViewController view];
         if ([self currentFrontViewPosition] == FrontViewPositionLeft) {
             switch ([recognizer state]) {
+                case UIGestureRecognizerStateBegan:
+                    if (ABS([recognizer translationInView:[self frontView]].y) >= ABS([recognizer translationInView:[self frontView]].x)) {
+                        [recognizer setEnabled:NO];
+                    }
+                    else{
+                        [visibleController.body setScrollEnabled:NO];
+                    }
+                case UIGestureRecognizerStateFailed:
+                    [recognizer setEnabled:YES];
+
+                break;
                 case UIGestureRecognizerStateChanged:
                     if ([recognizer translationInView:[self view]].x < 0) {
                         [[self frontView] setFrame:CGRectMake(0, 0, [[self view] frame].size.width, [[self view]frame].size.height)];
                 
                     }
-                    else if ([recognizer translationInView:[self view]].x  > 0){
+                    else{
                         [[self frontView] setFrame:CGRectMake([recognizer translationInView:[self view]].x,
                                                               0,
                                                               [[self view] frame].size.width,
@@ -159,62 +103,74 @@
                     }
                 break;
                 case UIGestureRecognizerStateEnded:
-                    if ([[self frontView] frame].origin.x <= 200) {
-                        [UIView animateWithDuration:.10f delay:0.0f options:UIViewAnimationOptionCurveLinear animations:^{
-                            [[self frontView] setFrame:CGRectMake(0, 0, [[self view] frame].size.width,[[self view] frame].size.height )];
+                    if ([[self frontView] frame].origin.x >= 150 || [recognizer velocityInView:[self view]].x >= 1000) {
+                        [UIView animateWithDuration:.20f delay:0.0f options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState animations:^{
+                            [[self frontView] setFrame:CGRectMake(275, 0, [[self view] frame].size.width,[[self view] frame].size.height )];
                         }completion:^(BOOL finished){
-                            NSLog(@"FINISHED STATE ENDED");
+                            [visibleController.body setScrollEnabled:NO];
+                            [recognizer setEnabled:YES];
+                            self.currentFrontViewPosition = FrontViewPositionRight;
                         }];
                     }
                     else{
-                        [UIView animateWithDuration:.050f delay:0.0f options:UIViewAnimationOptionCurveLinear animations:^{
-                            [[self frontView] setFrame:CGRectMake(275, 0, [[self view] frame].size.width,[[self view] frame].size.height )];
+                        [UIView animateWithDuration:.20f delay:0.0f options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState animations:^{
+                            [[self frontView] setFrame:CGRectMake(0, 0, [[self view] frame].size.width,[[self view] frame].size.height )];
                         }completion:^(BOOL finished){
-                            NSLog(@"FINISHED STATE ENDED");
                         }];
                     }
-                break;
-        
             }
             
         }
         else{
             switch ([recognizer state]) {
                 case UIGestureRecognizerStateBegan:
-                    [[self frontView] setFrame:CGRectMake(([recognizer translationInView:[self view]].x + [[self frontView] frame].origin.x),
+                    if (ABS([recognizer translationInView:[self frontView]].y) >= ABS([recognizer translationInView:[self frontView]].x) ) {
+                        [recognizer setEnabled:NO];
+                    }
+                    else{
+                        [visibleController.body setScrollEnabled:NO];
+                    }
+                case UIGestureRecognizerStateFailed:
+                    [recognizer setEnabled:YES];
+                break;
+                
+                case UIGestureRecognizerStateChanged:
+                    if ([recognizer translationInView:[self view]].x > 0) {
+                        [[self frontView] setFrame:CGRectMake(275, 0, self.frontView.frame.size.width, self.frontView.frame.size.height)];
+                    }
+                    else{
+                    [[self frontView] setFrame:CGRectMake(([recognizer translationInView:[self view]].x + 275),
                                                               0,
                                                               [[self view] frame].size.width,
                                                               [[self view] frame].size.height)];
-                        
-                    if ([recognizer velocityInView:[self view]].x > 1000 ) {
-                        [UIView animateWithDuration:.10f delay:0.0f options:UIViewAnimationOptionCurveLinear animations:^{
-                            [[self frontView] setFrame:CGRectMake(0, 0, [[self view] frame].size.width,[[self view] frame].size.height )];
-                        }completion:^(BOOL finished){
-                            NSLog(@"FINISHED STATE ENDED");
-                        }];
                     }
+                    
                 break;
-            
+
                 case UIGestureRecognizerStateEnded:
-                    if ([[self view]frame].origin.x <= 100) {
-                        [UIView animateWithDuration:.05f delay:0.0f options:UIViewAnimationOptionCurveLinear animations:^{
+                    if ([[self frontView]frame].origin.x <= 100  || [recognizer velocityInView:[self view]].x < -800) {
+                        [UIView animateWithDuration:.20f delay:0.0f options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState animations:^{
                             [[self frontView] setFrame:CGRectMake(0, 0, [[self view] frame].size.width,[[self view] frame].size.height )];
                         }completion:^(BOOL finished){
-                            NSLog(@"FINISHED STATE ENDED");
+                            [visibleController.body setScrollEnabled:YES];
+                            [recognizer setEnabled:YES];
+                            self.currentFrontViewPosition = FrontViewPositionLeft;
                         }];
                     }
                     else{
-                        [UIView animateWithDuration:.10f delay:0.0f options:UIViewAnimationOptionCurveLinear animations:^{
+                        [UIView animateWithDuration:.20f delay:0.0f options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState animations:^{
                             [[self frontView] setFrame:CGRectMake(275, 0, [[self view] frame].size.width,[[self view] frame].size.height )];
                         }completion:^(BOOL finished){
-                            NSLog(@"FINISHED STATE ENDED");
                         }];
                     }
-                break;
+                
             }
         }
 }
 
-
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return YES;
+}
 
 @end

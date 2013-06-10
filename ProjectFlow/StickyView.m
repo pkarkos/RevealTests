@@ -26,7 +26,7 @@
                                                                      [self frame].size.width,
                                                                      [self frame].size.height)]];
         
-        [[self body] setContentSize:CGSizeMake([self frame].size.width, [self frame].size.height)];
+        [[self body] setContentSize:CGSizeMake([self frame].size.width, [self frame].size.height+500)];
         
         [[self body] setContentInset:UIEdgeInsetsMake(165.0f,
                                                       0.0f,

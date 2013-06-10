@@ -20,7 +20,7 @@ typedef enum {
 @property (strong, nonatomic) UIViewController *rearViewController;
 @property (strong, nonatomic) HiddenTableViewController *hiddenTableViewController;
 @property (assign, nonatomic) FrontViewController *currentFrontViewPosition;
-@property (nonatomic) BOOL hiddenViewIsBeingShown;
+@property (strong, nonatomic) UIPanGestureRecognizer *panGesture;
 
 - (id)initWithFrontViewController:(UIViewController *)frontViewController
             andRearViewController:(UIViewController *)rearViewController;
@@ -29,5 +29,6 @@ typedef enum {
 - (void)addRearViewControllerToHeirarchy:(UIViewController *)rearViewController;
 
 - (void)revealGesture:(UIPanGestureRecognizer *)recognizer;
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer;
 
 @end
